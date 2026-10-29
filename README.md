@@ -102,3 +102,31 @@ NEIS API 인증키 발급 및 학교 코드 설정 후 작동합니다. 실제 �
 - NEIS Open API 개발자 가이드: https://open.neis.go.kr/portal/guide/apiGuidePage.do
 - 네이버 robots.txt 가이드: https://searchadvisor.naver.com/guide/seo-basic-robots
 - 네이버 SEO 기본 가이드: https://searchadvisor.naver.com/guide/seo-basic-intro
+
+## GitHub에 폴더까지 정확하게 올리는 방법 (Windows 초보자용)
+
+GitHub 웹사이트의 파일 선택 창에서는 폴더를 선택하기 어렵습니다. `app`, `lib`, `supabase` 폴더를 빠뜨리지 않도록 **GitHub Desktop**을 사용하는 것을 권장합니다.
+
+1. 이 ZIP을 압축 해제합니다. 압축을 푼 폴더 안에 `app`, `lib`, `supabase`, `package.json`이 모두 있는지 확인합니다.
+2. GitHub Desktop을 설치하고 GitHub 계정으로 로그인합니다: https://desktop.github.com/
+3. GitHub Desktop에서 `File` → `Clone repository...` → `URL`을 선택합니다.
+4. 저장소 주소에 `https://github.com/haengjeung-pixel/hakgyoon-sangmoom.git` 을 입력하고 `Clone`을 누릅니다.
+5. GitHub Desktop에서 `Show in Explorer`를 눌러 저장소 폴더를 엽니다.
+6. 압축을 푼 이 프로젝트 폴더 안의 **모든 항목**(`app`, `lib`, `supabase` 폴더와 설정 파일)을 복사해 저장소 폴더에 붙여넣습니다. 같은 이름 파일은 덮어씁니다. `app` 폴더를 열어서 그 안의 파일만 복사하는 것이 아니라, `app` 폴더 자체가 저장소 루트에 있어야 합니다.
+7. 저장소 루트에 `app`, `lib`, `supabase`, `package.json`, `next.config.mjs`가 함께 보이는지 확인합니다.
+8. GitHub Desktop으로 돌아와 변경 사항을 확인합니다. Summary에 `Restore complete project structure`라고 입력하고 `Commit to main`을 누릅니다.
+9. `Push origin`을 눌러 GitHub에 올립니다.
+10. GitHub 웹사이트를 새로고침해서 `app`, `lib`, `supabase` 폴더가 실제로 보이는지 확인합니다.
+
+**보안:** `.env.local`, 실제 API 키, Supabase `service_role` 키는 절대 GitHub에 올리지 마세요. `.env.example`은 예시용이라 올려도 됩니다.
+
+## Vercel 설정 확인
+
+- Framework Preset: `Next.js`
+- Root Directory: 저장소 루트 (기본값; 별도 하위 폴더를 지정하지 않음)
+- Build Command: 기본값 또는 `npm run build`
+- Install Command: 기본값 또는 `npm install`
+
+`app` 폴더가 GitHub 저장소 루트에 올라간 것을 확인한 뒤에만 새 배포를 실행하세요. 만약 새 배포가 실패한다면, Build Logs에서 `Error`가 처음 나오는 줄과 그 위아래 몇 줄을 확인해야 합니다.
+
+이 ZIP의 폴더 구조는 확인했지만, 이 실행 환경에서 패키지 설치가 시간 초과되어 `npm run build`의 성공 여부는 확인하지 못했습니다. 따라서 실제 Vercel 배포 및 Supabase/NEIS 연동이 검증 완료되었다고 보장하지 않습니다.
